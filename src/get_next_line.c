@@ -1,4 +1,5 @@
 #include "get_next_line.h"
+#include "get_next_line_utils.h"
 
 static char *read_into_stash(int fd, char *stash);
 static char *extract_line(char *stash);
@@ -60,7 +61,7 @@ static char *read_into_stash(int fd, char *stash)
   }
 
   bytes_read = 1; // allow loop entry
-  while(!ft_strchr(stash, '\n') && bytes_read > 0)
+  while(!gnl_strchr(stash, '\n') && bytes_read > 0)
   {
     bytes_read = read(fd, buffer, BUFFER_SIZE);
     if(bytes_read < 0)
@@ -73,7 +74,7 @@ static char *read_into_stash(int fd, char *stash)
     buffer[bytes_read] = '\0';
     if(bytes_read > 0)
     {
-      stash = ft_strjoin_free(stash, buffer);
+      stash = gnl_strjoin_free(stash, buffer);
       if(!stash)
       {
         free(buffer);
@@ -185,7 +186,7 @@ static char *trim_stash(char *stash)
   * 
   * +1 for null termination
   */
-  new_stash = malloc(ft_strlen(stash + i) + 1);
+  new_stash = malloc(gnl_strlen(stash + i) + 1);
   if(!new_stash)
   {
     free(stash);

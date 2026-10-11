@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "get_next_line_utils.h"
 
 /*
 * This is a helper that lets our stash grow
@@ -18,7 +18,7 @@
 * - new stash:        "hello\nworld"
 * - old stash:        freed
 */
-char	*ft_strjoin_free(char *s1, char *s2)
+char	*gnl_strjoin_free(char *s1, char *s2)
 {
   char *joined;
   size_t i;
@@ -27,7 +27,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
   if(!s2)
     return NULL;
 
-  joined = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+  joined = malloc(gnl_strlen(s1) + gnl_strlen(s2) + 1);
   if(!joined){
     free(s1);
     return NULL;
@@ -53,7 +53,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
   return joined;
 }
 
-size_t	ft_strlen(const char *s)
+size_t	gnl_strlen(const char *s)
 {
 	size_t	i;
 
@@ -65,7 +65,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*gnl_strchr(const char *s, int c)
 {
 	size_t	i;
 	char	target;
@@ -85,14 +85,14 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *s)
+char	*gnl_strdup(const char *s)
 {
 	char	*copy;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
-	copy = malloc(ft_strlen(s) + 1);
+	copy = malloc(gnl_strlen(s) + 1);
 	if (!copy)
 		return (NULL);
 	i = 0;

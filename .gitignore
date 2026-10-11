@@ -1,3 +1,4 @@
 *.o
 *.a
 gnl_test
+compile_commands.json
