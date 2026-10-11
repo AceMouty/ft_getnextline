@@ -2,16 +2,15 @@ NAME = libftgetnextline.a
 TEST_NAME = gnl_test
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Iinclude
 BUFFER_SIZE = 42
 AR = ar
 ARFLAGS = rcs
 
-SRC = get_next_line.c get_next_line_utils.c
-TEST_SRC = main.c
-OBJ_DIR = build/bs$(BUFFER_SIZE)
-#OBJ = $(SRC:.c=.o)
-OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
+SRC = src/get_next_line.c src/get_next_line_utils.c
+TEST_SRC = tests/test_get_next_line.c
+OBJ_DIR = build/buff_size$(BUFFER_SIZE)
+OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
 
 VALGRIND = valgrind
 VALGRINDFLAGS = --leak-check=full \
@@ -25,7 +24,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
 
-$(OBJ_DIR)/%.o: %.c get_next_line.h | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: src/%.c include/get_next_line.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -D BUFFER_SIZE=$(BUFFER_SIZE) -c $< -o $@
 
 $(OBJ_DIR):
